@@ -152,7 +152,8 @@ void getPublishDate(string &publishDate)
     } while (!(date_check(year, month, day)));
 }
 
-void getTitle(string &title){
+void getTitle(string &title)
+{
     cout << "Title: ";
     getline(cin, title);
 }
@@ -169,4 +170,5 @@ string get_next_id()
     fout << id + 1;
     return to_string(id);
 }
+
 

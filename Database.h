@@ -108,5 +108,19 @@ public:
     {
         csvio->write(dataTable);
     }
+
+    void searchById(string id)
+    {
+    try
+    {
+        this->printRecord(id);
+    }
+    catch (const char *err)
+    {
+        cout << err << endl;
+        system("read");
+    }
+}
 };
+
 

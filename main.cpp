@@ -49,15 +49,7 @@ int main()
         case 2:
             cout << "Please Input Id to search: ";
             cin >> id;
-            try
-            {
-                database->printRecord(id);
-            }
-            catch (const char *err)
-            {
-                cout << err << endl;
-                system("read");
-            }
+            database->searchById(id);
             cin.clear();
             break;
         case 3:
