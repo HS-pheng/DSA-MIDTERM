@@ -267,10 +267,7 @@ public:
         }
 
 
-        for (int i = 0; i < 2; i++) {
-            max_width[i] += 5;
-            cout << i << ": "<<  max_width[i] << endl;
-        }
+        for (int i = 0; i < 2; i++) max_width[i] += 5;
 
         cout << left << setw(max_width[0]) << "ID" << setw(max_width[1]) << "Name" << endl;
 
@@ -329,46 +326,121 @@ void deleteRecord(Double_list<DataRecord> &dataTable, string id){
         }
 }
 
-DataRecord search(Double_list<DataRecord> &dataTable, string id){
-    for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
-        {
-            if ((trav->data).id != id)
-            {
-                continue;
-            }
 
-            return (trav->data);
+
+class Database {
+    private:
+        Double_list<DataRecord> dataTable;
+        CsvIO *csvio;
+    
+    public: 
+        Database(string baseFile) {
+            csvio = new CsvIO(baseFile);
+            csvio->read(dataTable);
         }
-    throw "Not found";
-}
 
-void printRecord(DataRecord dataRecord){
-    cout << left << setw((dataRecord.id).length() + 5) << "ID" << setw((dataRecord.name).length()) << "Name" << endl; 
-    cout << left << setw((dataRecord.id).length() + 5) << dataRecord.id << setw((dataRecord.name).length()) << dataRecord.name << endl;
-}
+        void printTable() {
+            this->csvio->print_info(this->dataTable);
+        }
+
+        void addRecord(string id, string name) {
+            DataRecord sample;
+            sample.id = id;
+            sample.name = name;
+            dataTable.push_back(sample);
+        }
+
+        void printRecord(string id) {
+            DataRecord dataRecord = findRecord(id); 
+            cout << left << setw((dataRecord.id).length() + 5) << "ID" << setw((dataRecord.name).length()) << "Name" << endl; 
+            cout << left << setw((dataRecord.id).length() + 5) << dataRecord.id << setw((dataRecord.name).length()) << dataRecord.name << endl;
+        }
+
+        DataRecord findRecord(string id){
+            for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+                {
+                    if ((trav->data).id != id) continue;
+
+                    return (trav->data);
+                }
+            throw "Not found";
+        }
+
+        bool deleteRecord(string id) {
+            for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next) {
+                if ((trav->data).id != id)
+                {
+                    continue;
+                }
+
+                if (dataTable.size() == 1)
+                {
+                    delete (trav);
+                    dataTable.list_head = dataTable.list_tail= NULL;
+                    return true;
+                }
+
+                Double_Node<DataRecord> *temp_next;
+                Double_Node<DataRecord> *temp_prev;
+
+                if (trav->next != NULL)
+                {
+                    temp_next = trav->next;
+                }
+                else
+                {
+                    trav->prev->next = NULL;
+                    dataTable.list_tail = trav->prev;
+                    delete (trav);
+                    return true;
+                }
+
+                if (trav->prev != NULL)
+                {
+                    temp_prev = trav->prev;
+                }
+                else
+                {
+                    trav->next->prev = NULL;
+                    dataTable.list_head = trav->next;
+                    delete (trav);
+                    break;
+                }
+
+                temp_next->prev = temp_prev;
+                temp_prev->next = temp_next;
+                delete (trav);
+                return true;
+            }
+            return false;
+        }
+
+        void close() {
+            csvio->write(dataTable);
+        }
+};
+
+
 int main()
 {
-    CsvIO *c = new CsvIO("test.csv");
+    Database *database = new Database("test.csv");
 
-    Double_list<DataRecord> dataTable;
-    c->read(dataTable);
-
-    DataRecord sample;
-    sample.id = "12";
-    sample.name = "Mix Kor Ban";
-    dataTable.push_back(sample);
-
-
-    deleteRecord(dataTable, "2");
-    c->write(dataTable);
+    database->addRecord("3", "ABC");
+    
     try {
-        DataRecord target = search(dataTable, "1234567"); 
-        printRecord(target);
-    } catch(const char* e) {
-        cout << e << endl;
+        database->printRecord("1");
+    } catch(const char* err) {
+        cout << err << endl;
     }
 
-    //c->print_info(dataTable); 
+    if (database->deleteRecord("1")) {
+        cout << "Data deleted successfully" << endl;
+    } else {
+        cout << "Data not found" << endl;
+    }
 
+    database->printTable();
+
+    database->close();
     return 0;
 }
