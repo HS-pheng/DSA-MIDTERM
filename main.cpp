@@ -2,10 +2,6 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include <list>
-#include <vector>
-#include <map>
-#include <iomanip>
 #include "Database.h"
 #include "util.h"
 using namespace std;
