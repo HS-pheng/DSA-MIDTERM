@@ -147,7 +147,6 @@ void getPublishDate(string &publishDate) //get publuish date from suer
     {
         cout << "Publish Date (dd/mm/yyyy): ";
         getline(cin, publishDate);
-        
         for (int i = 0; i < publishDate.length(); i++)
         {
             if (isdigit(publishDate[i]))
@@ -169,7 +168,7 @@ void getPublishDate(string &publishDate) //get publuish date from suer
         {
             throw "Bad Input";
         }
-
+        slashcounter = 0;
         stringstream ss(publishDate);
         getline(ss, day, '/');
         getline(ss, month, '/');

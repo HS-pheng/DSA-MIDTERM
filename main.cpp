@@ -16,9 +16,12 @@ int main()
 
     while (true)
     {
+        //print list of menu to perform functions
         print_menu();
 
         int choice;
+        
+        //get input choice and validate input
         get_input_choice(choice);
 
         switch (choice)
@@ -27,16 +30,23 @@ int main()
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             system("clear");
+
             // Display info to be filled up
             cout << "\nPleaes input following information!" << endl;
 
+            //Get id from txt file and auto increment write into id.txt file
             id = get_next_id();
+
+            //get title with validation
             do
             {
-                getTitle(title);
-            } while (title == "");
+                getTitle(title);    
+            } while (title == "");  //if title is null, continue looping
 
+            //get genre with validation inside
             getGenre(genre);
+
+            //get publish date from user, try, catch and throw error
             try
             {
                 getPublishDate(publishDate);
@@ -44,14 +54,16 @@ int main()
             catch (const char *err)
             {
                 cout << err << endl;
-                ;
                 return 0;
             };
 
+            //add record to database with parameter id, title, genre, publishdate
             database->addRecord(id, title, genre, publishDate);
-            cout << "Data has been recorded sucessfully!" << endl;
+            cout << "Data has been recorded sucessfully!" << endl;  //Pop up successfull message
 
+            //Close then write record into database (CSV file)
             database->close();
+
             system("read");
             break;
 
@@ -59,7 +71,10 @@ int main()
             system("clear");
             cout << "\nPlease Input Id to search: ";
             cin >> id;
+            
+            //perform search function by taking Id as parameter
             database->searchById(id);
+
             cin.clear();
             break;
         case 3: // print existing records
