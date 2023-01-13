@@ -104,13 +104,14 @@ public:
         return false;
     }
 
-    void close()
+    void close() //close and write into csv file
     {
-        csvio->write(dataTable);
+        csvio->write(dataTable); 
     }
 
     void searchById(string id)
     {
+        //try printing record, if it null, then throw error
     try
     {
         this->printRecord(id);

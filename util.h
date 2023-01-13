@@ -141,10 +141,35 @@ void getGenre(string &genre)
 void getPublishDate(string &publishDate)
 {
     string year, month, day;
+    int slashcounter = 0;
     do
     {
         cout << "Publish Date (dd/mm/yyyy): ";
         getline(cin, publishDate);
+        
+        for (int i = 0; i < publishDate.length(); i++)
+        {
+            if (isdigit(publishDate[i]))
+            {
+                continue;
+            }
+            else if (publishDate[i] == '/')
+            {
+                slashcounter++;
+                continue;
+            }
+            else
+            {
+                throw "Bad Input";
+            }
+            
+        }
+        cout << "slash counter: " << slashcounter<< endl;
+        if (slashcounter < 2 or slashcounter > 2)
+        {
+            throw "Bad Input";
+        }
+
         stringstream ss(publishDate);
         getline(ss, day, '/');
         getline(ss, month, '/');
@@ -170,5 +195,3 @@ string get_next_id()
     fout << id + 1;
     return to_string(id);
 }
-
-

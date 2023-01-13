@@ -33,7 +33,15 @@ int main()
             id = get_next_id();
             getTitle(title);
             getGenre(genre);
-            getPublishDate(publishDate);
+            try
+            {
+                getPublishDate(publishDate);
+            }
+            catch (const char *err)
+            {
+                cout << err << endl;;
+                return 0;
+            };
 
             database->addRecord(id, title, genre, publishDate);
             cout << "Data has been recorded sucessfully!" << endl;
