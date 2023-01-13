@@ -46,9 +46,9 @@ public:
             fout << (trav->data).genre << ',' << (trav->data).publishDate << "\n";
         }
     }
-
     void print_info(Double_list<DataRecord> dataTable)
     {
+        system("clear");
         int max_width[] = {5, 5, 5, 10};
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
@@ -70,17 +70,30 @@ public:
         {
             max_width[3] = (max_width[3] > (trav->data).publishDate.length()) ? max_width[3] : (trav->data).publishDate.length();
         }
-
+        cout << endl;
         for (int i = 0; i < 4; i++)
             max_width[i] += 5;
 
-        cout << left << setw(max_width[0]) << "ID" << setw(max_width[1]) << "Name";
-        cout << left << setw(max_width[2]) << "Genre" << setw(max_width[3]) << "Publish Date" << endl;
+        cout << left << setw(max_width[0]) << "ID" << setw(5) << "|" << setw(max_width[1]) << "Name" << setw(5) << "|";
+        cout << left << setw(max_width[2]) << "Genre" << setw(5) << "|" << setw(max_width[3]) << "Publish Date" << endl;
+        for (int i = 0; i < max_width[0] + max_width[1] + max_width[2] + max_width[3] + 15; i++)
+        {
+            cout << "_";
+        }
+        cout << endl;
+        if (dataTable.size() == 0){
+            cout << "No Data Found!" << endl;
+        } 
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
         {
-            cout << left << setw(max_width[0]) << (trav->data).id << setw(max_width[1]) << (trav->data).title;
-            cout << left << setw(max_width[2]) << (trav->data).genre << setw(max_width[3]) << (trav->data).publishDate << endl;
+            cout << left << setw(max_width[0]) << (trav->data).id << setw(5) << "|" << setw(max_width[1]) << (trav->data).title << setw(5) << "|";
+            cout << left << setw(max_width[2]) << (trav->data).genre << setw(5) << "|" << setw(max_width[3]) << (trav->data).publishDate << endl;
+            for (int i = 0; i < max_width[0] + max_width[1] + max_width[2] + max_width[3] + 15; i++)
+            {
+                cout << "_";
+            }
+            cout << endl;
         }
     }
 };

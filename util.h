@@ -42,19 +42,19 @@ bool date_check(string year_s, string month_s, string day_s) // function to vali
     return false;
 }
 
-void print_menu()
+void print_menu() //display options
 {
     system("clear");
-    cout << "\n\n========= Library Database Program =========" << endl;
-    cout << "[1]. Add record" << endl
-         << "[2]. Search record" << endl
-         << "[3]. Print records" << endl
-         << "[4]. Delete record" << endl
-         << "[5]. Exit" << endl
-         << "\tEnter your choice: ";
+    cout << "\n\n\t\t\t\t\t\t========= Library Database Program =========" << endl;
+    cout << "\t\t\t\t\t\t[1]. Add record" << endl
+         << "\t\t\t\t\t\t[2]. Search record" << endl
+         << "\t\t\t\t\t\t[3]. Print records" << endl
+         << "\t\t\t\t\t\t[4]. Delete record" << endl
+         << "\t\t\t\t\t\t[5]. Exit" << endl
+         << "\t\t\t\t\t\t\tEnter your choice: ";
 }
 
-void print_genre_opt()
+void print_genre_opt() //display genre options
 {
     cout << "Choose Genre" << endl;
     cout << "[1]. Horror" << endl
@@ -66,7 +66,7 @@ void print_genre_opt()
     cout << "Choose Genre Option: ";
 }
 
-void get_input_choice(int &choice)
+void get_input_choice(int &choice) //check error input
 {
     bool input_err;
     do
@@ -78,14 +78,15 @@ void get_input_choice(int &choice)
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             input_err = true;
-            cout << "\n\tInvalid input choice\n\n";
-            cout << "\tEnter your choice: ";
+            cout << "\n\t\t\t\t\t\t\tInvalid input choice\n\n";
+            cout << "\t\t\t\t\t\t\tEnter your choice: ";
         }
 
     } while (input_err);
+    cout << endl;
 }
 
-void getGenre(string &genre)
+void getGenre(string &genre) //get genre option from suer
 {
     int genre_option;
     bool gen_flag;
@@ -138,7 +139,7 @@ void getGenre(string &genre)
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
-void getPublishDate(string &publishDate)
+void getPublishDate(string &publishDate) //get publuish date from suer
 {
     string year, month, day;
     int slashcounter = 0;
@@ -164,7 +165,6 @@ void getPublishDate(string &publishDate)
             }
             
         }
-        cout << "slash counter: " << slashcounter<< endl;
         if (slashcounter < 2 or slashcounter > 2)
         {
             throw "Bad Input";
@@ -177,13 +177,13 @@ void getPublishDate(string &publishDate)
     } while (!(date_check(year, month, day)));
 }
 
-void getTitle(string &title)
+void getTitle(string &title) //get title from user
 {
     cout << "Title: ";
     getline(cin, title);
 }
 
-string get_next_id()
+string get_next_id() //automatically assign id
 {
     int id;
     ifstream fin("id.txt");

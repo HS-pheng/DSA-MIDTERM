@@ -33,11 +33,21 @@ public:
     void printRecord(string id)
     {
         DataRecord dataRecord = findRecord(id);
-        cout << left << setw((dataRecord.id).length() + 5) << "ID" << setw((dataRecord.title).length() + 5) << "Title";
-        cout << left << setw((dataRecord.genre).length() + 5) << "Genre" << setw((dataRecord.publishDate).length() + 5) << "Publish Date" << endl;
+        cout << left << setw(( dataRecord.id).length() +5) << "ID" << setw(5) << "|" << setw((dataRecord.title).length() +5) << "Name" << setw(5) << "|";
+        cout << left << setw((dataRecord.genre).length() +5) << "Genre" << setw(5) << "|" << setw((dataRecord.publishDate).length() +5) << "Publish Date" << endl;
+        for (int i = 0; i < (dataRecord.id).length() +5 + (dataRecord.title).length() +5 + (dataRecord.genre).length() +5  + (dataRecord.publishDate).length() +5 + 15; i++)
+        {
+            cout << "_";
+        }
+        cout << endl;
 
-        cout << left << setw((dataRecord.id).length() + 5) << dataRecord.id << setw((dataRecord.title).length()) << dataRecord.title;
-        cout << left << setw((dataRecord.genre).length() + 5) << dataRecord.genre << setw((dataRecord.publishDate).length()) << dataRecord.publishDate << endl;
+        cout << left << setw(( dataRecord.id).length() +5) << dataRecord.id << setw(5) << "|" << setw((dataRecord.title).length() +5) << dataRecord.title << setw(5) << "|";
+            cout << left << setw((dataRecord.genre).length() +5) << dataRecord.genre << setw(5) << "|" << setw((dataRecord.publishDate).length() +5) << dataRecord.publishDate << endl;
+            for (int i = 0; i < (dataRecord.id).length() +5 + (dataRecord.title).length() +5 + (dataRecord.genre).length() +5  + (dataRecord.publishDate).length() +5 + 15; i++)
+            {
+                cout << "_";
+            }
+            cout << endl;
         system("read");
     }
 
