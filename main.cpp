@@ -11,10 +11,12 @@ using namespace std;
 
 int main()
 {
-    Database *database = new Database("MOCK_DATA-3.csv");
+    // Create new database instance
+    Database *database = new Database("MOCK_DATA-4.csv");
 
     string id = "", title = "", genre = "", publishDate = "";
 
+    // Enter program loop
     while (true)
     {
         // print list of menu to perform functions
