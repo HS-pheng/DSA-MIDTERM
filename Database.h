@@ -33,21 +33,22 @@ public:
     void printRecord(string id)
     {
         DataRecord dataRecord = findRecord(id);
-        cout << left << setw(( dataRecord.id).length() +5) << "ID" << setw(5) << "|" << setw((dataRecord.title).length() +5) << "Name" << setw(5) << "|";
-        cout << left << setw((dataRecord.genre).length() +5) << "Genre" << setw(5) << "|" << setw((dataRecord.publishDate).length() +5) << "Publish Date" << endl;
-        for (int i = 0; i < (dataRecord.id).length() +5 + (dataRecord.title).length() +5 + (dataRecord.genre).length() +5  + (dataRecord.publishDate).length() +5 + 15; i++)
-        {
-            cout << "_";
-        }
-        cout << endl;
 
-        cout << left << setw(( dataRecord.id).length() +5) << dataRecord.id << setw(5) << "|" << setw((dataRecord.title).length() +5) << dataRecord.title << setw(5) << "|";
-            cout << left << setw((dataRecord.genre).length() +5) << dataRecord.genre << setw(5) << "|" << setw((dataRecord.publishDate).length() +5) << dataRecord.publishDate << endl;
-            for (int i = 0; i < (dataRecord.id).length() +5 + (dataRecord.title).length() +5 + (dataRecord.genre).length() +5  + (dataRecord.publishDate).length() +5 + 15; i++)
-            {
-                cout << "_";
-            }
-            cout << endl;
+        cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() +5) << "-" <<  setw(5) << "+";
+        cout << left << setw((dataRecord.genre).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() +5) << "-" << right << setw(5) << "+" << endl;
+
+        cout << left << setfill(' ') << setw(5) << "|" << setw(( dataRecord.id).length() +5) << "ID" << setw(5) << "|" << setw((dataRecord.title).length() +5) << "Name" << setw(5) << "|";
+        cout << left << setw((dataRecord.genre).length() +5) << "Genre" << setw(5) << "|" << setw((dataRecord.publishDate).length() +5) << "Publish Date" << right << setw(5) << "|" << endl;
+
+        cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() +5) << "-" <<  setw(5) << "+";
+        cout << left << setw((dataRecord.genre).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() +5) << "-" << right << setw(5) << "+" << endl;
+
+
+        cout << left << setfill(' ') << setw(5) << "|" << setw(( dataRecord.id).length() +5) << dataRecord.id << setw(5) << "|" << setw((dataRecord.title).length() +5) << dataRecord.title << setw(5) << "|";
+        cout << left << setw((dataRecord.genre).length() +5) << dataRecord.genre << setw(5) << "|" << setw((dataRecord.publishDate).length() +5) << dataRecord.publishDate << right << setw(5) << "|" << endl;
+        
+        cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() +5) << "-" <<  setw(5) << "+";
+        cout << left << setw((dataRecord.genre).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() +5) << "-" << right << setw(5) << "+" << endl;
         system("pause");
     }
 

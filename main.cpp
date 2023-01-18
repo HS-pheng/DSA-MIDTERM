@@ -4,6 +4,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include <iomanip>
+#include <limits>
 #include "Database.h"
 #include "util.h"
 using namespace std;
