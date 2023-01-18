@@ -46,6 +46,7 @@ public:
             fout << (trav->data).genre << ',' << (trav->data).publishDate << "\n";
         }
     }
+
     void print_info(Double_list<DataRecord> dataTable)
     {
         system("cls");
@@ -73,27 +74,27 @@ public:
         cout << endl;
         for (int i = 0; i < 4; i++)
             max_width[i] += 5;
+            
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+" << setw(max_width[3]) << "-" << right << setw(5) << "+" << endl;
 
-        cout << left << setw(max_width[0]) << "ID" << setw(5) << "|" << setw(max_width[1]) << "Name" << setw(5) << "|";
-        cout << left << setw(max_width[2]) << "Genre" << setw(5) << "|" << setw(max_width[3]) << "Publish Date" << endl;
-        for (int i = 0; i < max_width[0] + max_width[1] + max_width[2] + max_width[3] + 15; i++)
-        {
-            cout << "_";
-        }
-        cout << endl;
+        cout << left << setfill(' ') << setw(5) << "|"  << setw(max_width[0]) << "ID" << setw(5) << "|" << setw(max_width[1]) << "Name" << setw(5) << "|";
+        cout << left << setw(max_width[2]) << "Genre" << setw(5) << "|" << setw(max_width[3]) << "Publish Date" << right << setw(5) << "|" << endl;
+
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+" << setw(max_width[3]) << "-" << right << setw(5) << "+" << endl;
+
         if (dataTable.size() == 0){
             cout << "No Data Found!" << endl;
         } 
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
         {
-            cout << left << setw(max_width[0]) << (trav->data).id << setw(5) << "|" << setw(max_width[1]) << (trav->data).title << setw(5) << "|";
-            cout << left << setw(max_width[2]) << (trav->data).genre << setw(5) << "|" << setw(max_width[3]) << (trav->data).publishDate << endl;
-            for (int i = 0; i < max_width[0] + max_width[1] + max_width[2] + max_width[3] + 15; i++)
-            {
-                cout << "_";
-            }
-            cout << endl;
+            cout << left << setfill(' ') << setw(5) << "|" << setw(max_width[0]) << (trav->data).id << setw(5) << "|" << setw(max_width[1]) << (trav->data).title << setw(5) << "|";
+            cout << left << setw(max_width[2]) << (trav->data).genre << setw(5) << "|" << setw(max_width[3]) << (trav->data).publishDate << right << setw(5) << "|" << endl;
+
         }
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+" << setw(max_width[3]) << "-"  << right << setw(5) << "+" << endl;
     }
 };
