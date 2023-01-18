@@ -17,7 +17,7 @@ public:
     void printTable()
     {
         this->csvio->print_info(this->dataTable);
-        system("read");
+        system("pause");
     }
 
     void addRecord(string id, string title, string genre, string publishDate)
@@ -48,7 +48,7 @@ public:
                 cout << "_";
             }
             cout << endl;
-        system("read");
+        system("pause");
     }
 
     DataRecord findRecord(string id)
@@ -129,7 +129,7 @@ public:
     catch (const char *err)
     {
         cout << err << endl;
-        system("read");
+        system("pause");
     }
 }
 };
