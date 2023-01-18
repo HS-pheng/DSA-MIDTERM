@@ -12,8 +12,6 @@ int main()
 
     string id, title, genre, publishDate;
 
-    int genre_option;
-
     while (true)
     {
         //print list of menu to perform functions
