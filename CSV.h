@@ -48,7 +48,7 @@ public:
     }
     void print_info(Double_list<DataRecord> dataTable)
     {
-        system("clear");
+        system("cls");
         int max_width[] = {5, 5, 5, 10};
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)

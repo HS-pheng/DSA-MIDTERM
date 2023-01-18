@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
+#include <iomanip>
 #include "Database.h"
 #include "util.h"
 using namespace std;
@@ -27,7 +29,7 @@ int main()
         case 1: // add record to list
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            system("clear");
+            system("cls");
 
             // Display info to be filled up
             cout << "\nPleaes input following information!" << endl;
@@ -62,11 +64,11 @@ int main()
             //Close then write record into database (CSV file)
             database->close();
 
-            system("read");
+            system("pause");
             break;
 
         case 2: // search for existing record
-            system("clear");
+            system("cls");
             cout << "\nPlease Input Id to search: ";
             cin >> id;
             
@@ -92,13 +94,13 @@ int main()
             {
                 cout << "Data not found" << endl;
             }
-            system("read");
+            system("pause");
             break;
         case 5: // terminate program
             return 0;
         default:
             cout << "Invalid choice" << endl;
-            system("read");
+            system("pause");
             break;
         }
     }

@@ -44,7 +44,7 @@ bool date_check(string year_s, string month_s, string day_s) // function to vali
 
 void print_menu() //display options
 {
-    system("clear");
+    system("cls");
     cout << "\n\n\t\t\t\t\t\t========= Library Database Program =========" << endl;
     cout << "\t\t\t\t\t\t[1]. Add record" << endl
          << "\t\t\t\t\t\t[2]. Search record" << endl
