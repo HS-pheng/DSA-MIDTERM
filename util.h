@@ -42,19 +42,31 @@ bool date_check(string year_s, string month_s, string day_s) // function to vali
     return false;
 }
 
-void print_menu() //display options
+void print_menu() // display options
 {
-    system("cls");
+    system("clear");
     cout << "\n\n\t\t\t\t\t\t========= Library Database Program =========" << endl;
     cout << "\t\t\t\t\t\t[1]. Add record" << endl
          << "\t\t\t\t\t\t[2]. Search record" << endl
-         << "\t\t\t\t\t\t[3]. Print records" << endl
-         << "\t\t\t\t\t\t[4]. Delete record" << endl
-         << "\t\t\t\t\t\t[5]. Exit" << endl
+         << "\t\t\t\t\t\t[3]. Update record" << endl
+         << "\t\t\t\t\t\t[4]. Print records" << endl
+         << "\t\t\t\t\t\t[5]. Delete record" << endl
+         << "\t\t\t\t\t\t[6]. Exit" << endl
          << "\t\t\t\t\t\t\tEnter your choice: ";
 }
 
-void print_genre_opt() //display genre options
+void print_update_menu()
+{
+    system("clear");
+    cout << "\t\t\t\t\t\t[1]. Update Title" << endl
+         << "\t\t\t\t\t\t[2]. Update Genre" << endl
+         << "\t\t\t\t\t\t[3]. Update Publish Date" << endl
+         << "\t\t\t\t\t\t[4]. Update Entire Row" << endl
+         << "\t\t\t\t\t\t[5]. Back" << endl
+         << "\t\t\t\t\t\t\tEnter your choice: ";
+}
+
+void print_genre_opt() // display genre options
 {
     cout << "Choose Genre" << endl;
     cout << "[1]. Horror" << endl
@@ -66,7 +78,7 @@ void print_genre_opt() //display genre options
     cout << "Choose Genre Option: ";
 }
 
-void get_input_choice(int &choice) //check error input
+void get_update_choice(int &choice) // check error input
 {
     bool input_err;
     do
@@ -86,7 +98,27 @@ void get_input_choice(int &choice) //check error input
     cout << endl;
 }
 
-void getGenre(string &genre) //get genre option from suer
+void get_input_choice(int &choice) // check error input
+{
+    bool input_err;
+    do
+    {
+        input_err = false;
+        cin >> choice;
+        if (cin.fail() || (choice != 2 && choice != 1 && choice != 3 && choice != 4 && choice != 5 && choice != 6))
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            input_err = true;
+            cout << "\n\t\t\t\t\t\t\tInvalid input choice\n\n";
+            cout << "\t\t\t\t\t\t\tEnter your choice: ";
+        }
+
+    } while (input_err);
+    cout << endl;
+}
+
+void getGenre(string &genre) // get genre option from suer
 {
     int genre_option;
     bool gen_flag;
@@ -139,8 +171,9 @@ void getGenre(string &genre) //get genre option from suer
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
-void getPublishDate(string &publishDate) //get publuish date from suer
+void getPublishDate(string &publishDate) // get publuish date from suer
 {
+
     string year, month, day;
     int slashcounter = 0;
     do
@@ -162,7 +195,6 @@ void getPublishDate(string &publishDate) //get publuish date from suer
             {
                 throw "Bad Input";
             }
-            
         }
         if (slashcounter < 2 or slashcounter > 2)
         {
@@ -176,13 +208,16 @@ void getPublishDate(string &publishDate) //get publuish date from suer
     } while (!(date_check(year, month, day)));
 }
 
-void getTitle(string &title) //get title from user
+void getTitle(string &title) // get title from user
 {
-    cout << "Title: ";
-    getline(cin, title);
+    do
+    {
+        cout << "Title: ";
+        getline(cin, title);
+    } while (title == ""); // if title is null, continue looping
 }
 
-string get_next_id() //automatically assign id
+string get_next_id() // automatically assign id
 {
     int id;
     ifstream fin("id.txt");
