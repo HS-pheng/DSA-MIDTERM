@@ -17,7 +17,7 @@ public:
     void printTable()
     {
         this->csvio->print_info(this->dataTable);
-        system("pause");
+        system("read");
     }
 
     void addRecord(string id, string title, string genre, string publishDate)
@@ -34,22 +34,21 @@ public:
     {
         DataRecord dataRecord = findRecord(id);
 
-        cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() +5) << "-" <<  setw(5) << "+";
-        cout << left << setw((dataRecord.genre).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() +5) << "-" << right << setw(5) << "+" << endl;
+        cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() + 5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() + 5) << "-" << setw(5) << "+";
+        cout << left << setw((dataRecord.genre).length() + 5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() + 5) << "-" << right << setw(5) << "+" << endl;
 
-        cout << left << setfill(' ') << setw(5) << "|" << setw(( dataRecord.id).length() +5) << "ID" << setw(5) << "|" << setw((dataRecord.title).length() +5) << "Name" << setw(5) << "|";
-        cout << left << setw((dataRecord.genre).length() +5) << "Genre" << setw(5) << "|" << setw((dataRecord.publishDate).length() +5) << "Publish Date" << right << setw(5) << "|" << endl;
+        cout << left << setfill(' ') << setw(5) << "|" << setw((dataRecord.id).length() + 5) << "ID" << setw(5) << "|" << setw((dataRecord.title).length() + 5) << "Name" << setw(5) << "|";
+        cout << left << setw((dataRecord.genre).length() + 5) << "Genre" << setw(5) << "|" << setw((dataRecord.publishDate).length() + 5) << "Publish Date" << right << setw(5) << "|" << endl;
 
-        cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() +5) << "-" <<  setw(5) << "+";
-        cout << left << setw((dataRecord.genre).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() +5) << "-" << right << setw(5) << "+" << endl;
+        cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() + 5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() + 5) << "-" << setw(5) << "+";
+        cout << left << setw((dataRecord.genre).length() + 5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() + 5) << "-" << right << setw(5) << "+" << endl;
 
+        cout << left << setfill(' ') << setw(5) << "|" << setw((dataRecord.id).length() + 5) << dataRecord.id << setw(5) << "|" << setw((dataRecord.title).length() + 5) << dataRecord.title << setw(5) << "|";
+        cout << left << setw((dataRecord.genre).length() + 5) << dataRecord.genre << setw(5) << "|" << setw((dataRecord.publishDate).length() + 5) << dataRecord.publishDate << right << setw(5) << "|" << endl;
 
-        cout << left << setfill(' ') << setw(5) << "|" << setw(( dataRecord.id).length() +5) << dataRecord.id << setw(5) << "|" << setw((dataRecord.title).length() +5) << dataRecord.title << setw(5) << "|";
-        cout << left << setw((dataRecord.genre).length() +5) << dataRecord.genre << setw(5) << "|" << setw((dataRecord.publishDate).length() +5) << dataRecord.publishDate << right << setw(5) << "|" << endl;
-        
-        cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() +5) << "-" <<  setw(5) << "+";
-        cout << left << setw((dataRecord.genre).length() +5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() +5) << "-" << right << setw(5) << "+" << endl;
-        system("pause");
+        cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() + 5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() + 5) << "-" << setw(5) << "+";
+        cout << left << setw((dataRecord.genre).length() + 5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() + 5) << "-" << right << setw(5) << "+" << endl;
+        system("read");
     }
 
     DataRecord findRecord(string id)
@@ -62,6 +61,51 @@ public:
             return (trav->data);
         }
         throw "Not found";
+    }
+
+    void updateRecordAll(string id, string title, string genre, string publishDate)
+    {
+        deleteRecord(id);
+        addRecord(id, title, genre, publishDate);
+    }
+
+    void updateRecordTitle(string id, string title)
+    {
+        for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+        {
+            if ((trav->data).id != id)
+                continue;
+            trav->data.title = title;
+        }
+        cout << "Successfully modify title to: " << title << endl;
+        printRecord(id);
+        close();
+    }
+
+    void updateRecordGenre(string id, string genre)
+    {
+         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+        {
+            if ((trav->data).id != id)
+                continue;
+            trav->data.genre = genre;
+        }
+        cout << "Successfully modify genre to: " << genre << endl;
+        printRecord(id);
+        close();
+    }
+
+    void updateRecordPublishDate(string id, string publishDate)
+    {
+         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+        {
+            if ((trav->data).id != id)
+                continue;
+            trav->data.publishDate = publishDate;
+        }
+        cout << "Successfully modify publishDate to: " << publishDate << endl;
+        printRecord(id);
+        close();
     }
 
     bool deleteRecord(string id)
@@ -115,24 +159,22 @@ public:
         return false;
     }
 
-    void close() //close and write into csv file
+    void close() // close and write into csv file
     {
-        csvio->write(dataTable); 
+        csvio->write(dataTable);
     }
 
     void searchById(string id)
     {
-        //try printing record, if it null, then throw error
-    try
-    {
-        this->printRecord(id);
+        // try printing record, if it null, then throw error
+        try
+        {
+            this->printRecord(id);
+        }
+        catch (const char *err)
+        {
+            cout << err << endl;
+            system("read");
+        }
     }
-    catch (const char *err)
-    {
-        cout << err << endl;
-        system("pause");
-    }
-}
 };
-
-
