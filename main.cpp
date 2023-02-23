@@ -89,7 +89,7 @@ int main()
             cout << "\nPlease Input Record Id to Modify: ";
             cin >> id;
             try
-            {
+            {   
                 database->findRecord(id);
             }
             catch (const char *err)
@@ -103,7 +103,7 @@ int main()
             switch (update_choice)
             {
 
-            case 1:
+            case '1':
                 // get title with validation
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -113,14 +113,14 @@ int main()
                 } while (title == ""); // if title is null, continue looping
                 database->updateRecordTitle(id, title);
                 break;
-            case 2:
+            case '2':
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 getGenre(genre);
                 database->updateRecordGenre(id, genre);
                 break;
 
-            case 4:
+            case '4':
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 try
@@ -134,7 +134,7 @@ int main()
                 };
                 database->updateRecordPublishDate(id, publishDate);
                 break;
-            case 5:
+            case '5':
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 system("clear");
@@ -171,7 +171,7 @@ int main()
 
                 system("read");
                 break;
-            case 6:
+            case '6':
                 break;
             default:
                 break;
