@@ -272,6 +272,8 @@ int main()
                 getYear(year);
                 database->filterByPublishDate(year);
                 break;
+            case '4':
+                break;
             default:
                 break;
             }
