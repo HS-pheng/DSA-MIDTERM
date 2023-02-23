@@ -14,7 +14,7 @@ class DataRecord
 public:
     string id;
     string title;
-    string
+    string author;
     string genre;
     string publishDate;
 };

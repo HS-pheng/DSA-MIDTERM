@@ -45,7 +45,7 @@ int main()
             getTitle(title);
             
             //get author name
-            getAuthorName(author);
+            getAuthor(author);
 
             // get genre with validation inside
             getGenre(genre);
@@ -62,7 +62,7 @@ int main()
             };
 
             // add record to database with parameter id, title, genre, publishdate
-            database->addRecord(id, title, genre, publishDate);
+            database->addRecord(id, title, author, genre, publishDate);
             cout << "Data has been recorded sucessfully!" << endl; // Pop up successfull message
 
             // Close then write record into database (CSV file)
@@ -160,7 +160,7 @@ int main()
                 };
 
                 // add record to database with parameter id, title, genre, publishdate
-                database->updateRecordAll(id, title, genre, publishDate);
+                database->updateRecordAll(id, title, author, genre, publishDate);
                 cout << "Data has been updated sucessfully!" << endl; // Pop up successfull message
 
                 // Close then write record into database (CSV file)
@@ -168,7 +168,7 @@ int main()
 
                 system("read");
                 break;
-            case 5:
+            case 6:
                 break;
             default:
                 break;

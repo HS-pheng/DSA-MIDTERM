@@ -20,14 +20,16 @@ public:
             string fieldValue;
 
             DataRecord record;
-            string a, b, c, d;
+            string a, b, author, c, d;
             getline(ss, a, ',');
             getline(ss, b, ',');
+            getline(ss, author, ',');
             getline(ss, c, ',');
             getline(ss, d, ',');
 
             record.id = a;
             record.title = b;
+            record.author = author;
             record.genre = c;
             record.publishDate = d;
 
@@ -42,7 +44,7 @@ public:
 
         for (Double_Node<DataRecord> *trav = lm.head(); trav != NULL; trav = trav->next)
         {
-            fout << (trav->data).id << ',' << (trav->data).title << ',';
+            fout << (trav->data).id << ',' << (trav->data).title << ',' << (trav->data).author << ',';
             fout << (trav->data).genre << ',' << (trav->data).publishDate << "\n";
         }
     }
