@@ -343,7 +343,8 @@ public:
         {
             if (((trav->data).genre).find(genre) != string::npos) filterRecord.push_back(trav->data);  
         }
-        cout << "Filter by Genre: " << genre << endl;
+        system("clear");
+        cout << "\nFilter by Genre: " << genre << endl;
         printFilter(filterRecord);
 
     }
@@ -357,7 +358,8 @@ public:
                 filterRecord.push_back(trav->data);  
             }
         }
-        cout << "Filter by Publish Year: " << publishYear << endl;
+        system("clear");
+        cout << "\nFilter by Publish Year: " << publishYear << endl;
         printFilter(filterRecord);
     }
 
@@ -368,7 +370,8 @@ public:
         {
             if (((trav->data).author).find(author) != string::npos) filterRecord.push_back(trav->data);  
         }
-        cout << "Filter by Author: " << author << endl;
+        system("clear");
+        cout << "\nFilter by Author: " << author << endl;
         printFilter(filterRecord);
     }
 };

@@ -225,12 +225,14 @@ int main()
             {
             case '1':
                 database->sort(sort_by, "ASC");
+                cout << "\nSorting by " << sort_by << " in ascending order:" << endl;
                 database->printTable();
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
             case '2':
                 database->sort(sort_by, "DESC");
+                cout << "\nSorting by " << sort_by << " in descending order:" << endl;
                 database->printTable();
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');

@@ -81,7 +81,7 @@ void print_sorting_by_menu() {
 }
 
 void print_sorting_order_menu() {
-    cout << "\t\t\t\t\tOrder by: " << endl;
+    cout << "\t\t\t\t\t\tOrder by: " << endl;
     cout << "\t\t\t\t\t\t[1]. Asecnding Order" << endl
          << "\t\t\t\t\t\t[2]. Descending Order" << endl
          << "\t\t\t\t\t\t[3]. Back" << endl
@@ -89,7 +89,8 @@ void print_sorting_order_menu() {
 }
 
 void print_filter_by_menu() {
-    cout << "\t\t\t\t\tFilter by: " << endl;
+    system("clear");
+    cout << "\t\t\t\t\t\tFilter by: " << endl;
     cout << "\t\t\t\t\t\t[1]. Author" << endl
          << "\t\t\t\t\t\t[2]. Genre" << endl
          << "\t\t\t\t\t\t[3]. Publish Year" << endl
@@ -322,7 +323,7 @@ void getYear(string &year) // get title from user
 {
     do
     {
-        cout << "Year: ";
+        cout << "Enter Publish Year: ";
         getline(cin, year);
     } while (year == ""); // if title is null, continue looping
 }
