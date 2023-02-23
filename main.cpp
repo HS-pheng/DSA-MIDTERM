@@ -148,6 +148,9 @@ int main()
                 // get genre with validation inside
                 getGenre(genre);
 
+                //get author information
+                getAuthorities(author);
+
                 // get publish date from user, try, catch and throw error
                 try
                 {
