@@ -14,11 +14,12 @@ public:
         csvio->read(dataTable);
     }
 
-    void addRecord(string id, string title, string genre, string publishDate)
+    void addRecord(string id, string title, string author, string genre, string publishDate)
     {
         DataRecord sample;
         sample.id = id;
         sample.title = title;
+        sample.author = author;
         sample.genre = genre;
         sample.publishDate = publishDate;
         dataTable.push_back(sample);
@@ -57,10 +58,10 @@ public:
         throw "Not found";
     }
 
-    void updateRecordAll(string id, string title, string genre, string publishDate)
+    void updateRecordAll(string id, string title, string author, string genre, string publishDate)
     {
         deleteRecord(id);
-        addRecord(id, title, genre, publishDate);
+        addRecord(id, title, author, genre, publishDate);
     }
 
     void updateRecordTitle(string id, string title)
@@ -228,4 +229,83 @@ public:
     void sort(string sortedBy, string orderBy) {
         dataTable.sort(sortedBy, orderBy);
     }
+
+    void printFilter(Double_list<DataRecord> filterRecord) {
+        
+        system("clear");
+        int max_width[] = {5, 5, 5, 10};
+
+        for (Double_Node<DataRecord> *trav = filterRecord.head(); trav != NULL; trav = trav->next)
+        {
+            max_width[0] = (max_width[0] > (trav->data).id.length()) ? max_width[0] : (trav->data).id.length();
+        }
+
+        for (Double_Node<DataRecord> *trav = filterRecord.head(); trav != NULL; trav = trav->next)
+        {
+            max_width[1] = (max_width[1] > (trav->data).title.length()) ? max_width[1] : (trav->data).title.length();
+        }
+
+        for (Double_Node<DataRecord> *trav = filterRecord.head(); trav != NULL; trav = trav->next)
+        {
+            max_width[2] = (max_width[2] > (trav->data).genre.length()) ? max_width[2] : (trav->data).genre.length();
+        }
+
+        for (Double_Node<DataRecord> *trav = filterRecord.head(); trav != NULL; trav = trav->next)
+        {
+            max_width[3] = (max_width[3] > (trav->data).publishDate.length()) ? max_width[3] : (trav->data).publishDate.length();
+        }
+        cout << endl;
+        for (int i = 0; i < 4; i++)
+            max_width[i] += 5;
+            
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+" << setw(max_width[3]) << "-" << right << setw(5) << "+" << endl;
+
+        cout << left << setfill(' ') << setw(5) << "|"  << setw(max_width[0]) << "ID" << setw(5) << "|" << setw(max_width[1]) << "Name" << setw(5) << "|";
+        cout << left << setw(max_width[2]) << "Genre" << setw(5) << "|" << setw(max_width[3]) << "Publish Date" << right << setw(5) << "|" << endl;
+
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+" << setw(max_width[3]) << "-" << right << setw(5) << "+" << endl;
+
+        if (filterRecord.size() == 0){
+            cout << "No Data Found!" << endl;
+        } 
+
+        for (Double_Node<DataRecord> *trav = filterRecord.head(); trav != NULL; trav = trav->next)
+        {
+            cout << left << setfill(' ') << setw(5) << "|" << setw(max_width[0]) << (trav->data).id << setw(5) << "|" << setw(max_width[1]) << (trav->data).title << setw(5) << "|";
+            cout << left << setw(max_width[2]) << (trav->data).genre << setw(5) << "|" << setw(max_width[3]) << (trav->data).publishDate << right << setw(5) << "|" << endl;
+        }
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+" << setw(max_width[3]) << "-"  << right << setw(5) << "+" << endl;
+
+        system("read");
+    }
+
+    void filterByGenre(string genre) {
+        Double_list<DataRecord> filterRecord;
+
+        for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+        {
+            if (((trav->data).genre).find(genre) != string::npos) filterRecord.push_back(trav->data);  
+        }
+        cout << "Filter by Genre: " << genre << endl;
+        printFilter(filterRecord);
+
+    }
+
+    void filterByPublishDate(string publishYear){
+        Double_list<DataRecord> filterRecord;
+
+        for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+        {
+            if (((trav->data).publishDate).find(publishYear) != string::npos){
+                filterRecord.push_back(trav->data);  
+            }
+        }
+        cout << "Filter by Publish Year: " << publishYear << endl;
+        printFilter(filterRecord);
+    }
+
+    
 };

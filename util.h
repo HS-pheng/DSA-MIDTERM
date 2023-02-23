@@ -55,8 +55,9 @@ void print_menu() // display options
          << "\t\t\t\t\t\t[D]. Print record order by title in descending" << endl
          << "\t\t\t\t\t\t[E]. Print record order by publish date in ascending" << endl
          << "\t\t\t\t\t\t[F]. Print record order by publish date in descending" << endl
-         << "\t\t\t\t\t\t[4]. Delete record" << endl
-         << "\t\t\t\t\t\t[5]. Exit" << endl
+         << "\t\t\t\t\t\t[4]. Filter record by Genre" << endl
+         << "\t\t\t\t\t\t[5]. Delete record" << endl
+         << "\t\t\t\t\t\t[6]. Exit" << endl
          << "\t\t\t\t\t\t\tEnter your choice: ";
 }
 
@@ -65,9 +66,10 @@ void print_update_menu()
     system("clear");
     cout << "\t\t\t\t\t\t[1]. Update Title" << endl
          << "\t\t\t\t\t\t[2]. Update Genre" << endl
-         << "\t\t\t\t\t\t[3]. Update Publish Date" << endl
-         << "\t\t\t\t\t\t[4]. Update Entire Row" << endl
-         << "\t\t\t\t\t\t[5]. Back" << endl
+         << "\t\t\t\t\t\t[3]. Update Author's Name" << endl
+         << "\t\t\t\t\t\t[4]. Update Publish Date" << endl
+         << "\t\t\t\t\t\t[5]. Update Entire Row" << endl
+         << "\t\t\t\t\t\t[6]. Back" << endl
          << "\t\t\t\t\t\t\tEnter your choice: ";
 }
 
@@ -224,6 +226,16 @@ void getTitle(string &title) // get title from user
         getline(cin, title);
     } while (title == ""); // if title is null, continue looping
 }
+
+void getAuthor(string &author) {
+    do
+    {
+        cout << "Author: ";
+        getline(cin, author);
+    } while (author == ""); // if author is null, continue looping
+    
+} // get author
+
 
 string get_next_id() // automatically assign id
 {

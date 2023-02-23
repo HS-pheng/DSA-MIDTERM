@@ -14,7 +14,7 @@ int main()
     // Create new database instance
     Database *database = new Database("MOCK_DATA-4.csv");
 
-    string id = "", title = "", genre = "", publishDate = "";
+    string id = "", title = "", author= "", genre = "", publishDate = "";
 
     // Enter program loop
     while (true)
@@ -43,6 +43,9 @@ int main()
 
             // get title with validation
             getTitle(title);
+            
+            //get author name
+            getAuthorName(author);
 
             // get genre with validation inside
             getGenre(genre);
@@ -116,7 +119,8 @@ int main()
                 getGenre(genre);
                 database->updateRecordGenre(id, genre);
                 break;
-            case 3:
+            
+            case 4:
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 try
@@ -130,7 +134,7 @@ int main()
                 };
                 database->updateRecordPublishDate(id, publishDate);
                 break;
-            case 4:
+            case 5:
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 system("clear");
@@ -220,8 +224,15 @@ int main()
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             break;
-
-        case '4': // delete existing record
+        case '4':
+            cout << "Choose the Genre: ";
+            getGenre(genre);
+            database->filterByGenre(genre);
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            break;
+        case '5': // delete existing record
+            cin.clear();
             cout << "Please input id to delete: ";
             cin >> id;
             if (database->deleteRecord(id))
@@ -235,7 +246,7 @@ int main()
             }
             system("read");
             break;
-        case '5': // terminate program
+        case '6': // terminate program
             return 0;
         default:
             cout << "Invalid choice" << endl;
