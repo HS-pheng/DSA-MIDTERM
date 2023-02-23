@@ -366,7 +366,7 @@ public:
     {
         string strLower = toLowerCase(str);
         string substrLower = toLowerCase(substr);
-        return strLower.find(substrLower) != string::npos;
+        return strLower.find(substrLower) != string::npos; // Check if position is -1 or not
     }
 
     void filterByPublishDate(string publishYear)
@@ -375,7 +375,7 @@ public:
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
         {
-            if (((trav->data).publishDate).find(publishYear) != string::npos)
+            if (((trav->data).publishDate).find(publishYear) != string::npos) // Check if position is -1 or not
             {
                 filterRecord.push_back(trav->data);
             }
