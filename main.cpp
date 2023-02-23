@@ -14,7 +14,7 @@ int main()
     // Create new database instance
     Database *database = new Database("MOCK_DATA-4.csv");
 
-    string id = "", title = "", author= "", genre = "", publishDate = "";
+    string id = "", title = "", author = "", genre = "", publishDate = "";
 
     // Enter program loop
     while (true)
@@ -23,8 +23,8 @@ int main()
         print_menu();
 
         char choice;
-        int update_choice;
-
+        char update_choice, order_choice;
+        string sort_by;
         // get input choice and validate input
         get_input_choice(choice);
 
@@ -43,8 +43,8 @@ int main()
 
             // get title with validation
             getTitle(title);
-            
-            //get author name
+
+            // get author name
             getAuthor(author);
 
             // get genre with validation inside
@@ -119,7 +119,7 @@ int main()
                 getGenre(genre);
                 database->updateRecordGenre(id, genre);
                 break;
-            
+
             case 4:
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -148,7 +148,7 @@ int main()
                 // get genre with validation inside
                 getGenre(genre);
 
-                //get author information
+                // get author information
                 getAuthor(author);
 
                 // get publish date from user, try, catch and throw error
@@ -179,64 +179,91 @@ int main()
             cin.clear();
             break;
 
-        
-        case 'A': // print existing records
+        case '4':
             database->sort("id", "ASC");
             database->printTable();
 
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             break;
-        
-        case 'B': // print existing records
-            database->sort("id", "DESC");
-            database->printTable();
 
+        case '5':
+            print_sorting_by_menu();
+            get_print_sorting_by_choice(choice);
+            switch (choice)
+            {
+            case '1':
+                sort_by = "id";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            case '2':
+                sort_by = "title";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            case '3':
+                sort_by = "publishDate";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            case '4':
+                break;
+            default:
+                break;
+            }
+            print_sorting_order_menu();
+            get_print_sorting_order_choice(order_choice);
+            switch (order_choice)
+            {
+            case '1':
+                database->sort(sort_by, "ASC");
+                database->printTable();
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            case '2':
+                database->sort(sort_by, "DESC");
+                database->printTable();
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            case '3':
+                break;
+            default:
+                break;
+            }
+
+            break;
+
+        case '6':
+            print_filter_by_menu();
+            get_filter_option_choice(choice);
+            switch (choice)
+            {
+            case '1':
+                getAuthor(author);
+                database->filterByAuthor(author);
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            case '2':
+                getGenre(genre);
+                database->filterByGenre(genre);
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            case '3':
+                break;
+            default:
+                break;
+            }
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             break;
-
-        case 'C': // print existing records
-            database->sort("title", "ASC");
-            database->printTable();
-
+        case '7': // delete existing record
             cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            break;
-
-        case 'D': // print existing records
-            database->sort("title", "DESC");
-            database->printTable();
-
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            break;
-
-        case 'E': // print existing records
-            database->sort("publishDate", "ASC");
-            database->printTable();
-
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            break;
-        
-        case 'F': // print existing records
-            database->sort("publishDate", "DESC");
-            database->printTable();
-
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            break;
-        case '4':
-            cout << "Choose the Genre: ";
-            getGenre(genre);
-            database->filterByGenre(genre);
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            break;
-        case '5': // delete existing record
-            cin.clear();
-            cout << "Please input id to delete: ";
+            cout << "Please input Id to delete: ";
             cin >> id;
             if (database->deleteRecord(id))
             {
@@ -249,7 +276,7 @@ int main()
             }
             system("read");
             break;
-        case '6': // terminate program
+        case '8': // terminate program
             return 0;
         default:
             cout << "Invalid choice" << endl;

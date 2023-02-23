@@ -49,27 +49,51 @@ void print_menu() // display options
     cout << "\t\t\t\t\t\t[1]. Add record" << endl
          << "\t\t\t\t\t\t[2]. Search record" << endl
          << "\t\t\t\t\t\t[3]. Update record" << endl
-         << "\t\t\t\t\t\t[A]. Print record order by ID in ascending" << endl
-         << "\t\t\t\t\t\t[B]. Print record order by ID in descending" << endl
-         << "\t\t\t\t\t\t[C]. Print record order by title in ascending" << endl
-         << "\t\t\t\t\t\t[D]. Print record order by title in descending" << endl
-         << "\t\t\t\t\t\t[E]. Print record order by publish date in ascending" << endl
-         << "\t\t\t\t\t\t[F]. Print record order by publish date in descending" << endl
-         << "\t\t\t\t\t\t[4]. Filter record by Genre" << endl
-         << "\t\t\t\t\t\t[5]. Delete record" << endl
-         << "\t\t\t\t\t\t[6]. Exit" << endl
+         << "\t\t\t\t\t\t[4]. Print Record" << endl
+         << "\t\t\t\t\t\t[5]. Print Sorting Record" << endl
+         << "\t\t\t\t\t\t[6]. Filter Record" << endl
+         << "\t\t\t\t\t\t[7]. Delete record" << endl
+         << "\t\t\t\t\t\t[8]. Exit" << endl
          << "\t\t\t\t\t\t\tEnter your choice: ";
 }
 
 void print_update_menu()
 {
     system("clear");
+    cout << "\t\t\t\t\tUpdate Option: " << endl;
     cout << "\t\t\t\t\t\t[1]. Update Title" << endl
          << "\t\t\t\t\t\t[2]. Update Genre" << endl
          << "\t\t\t\t\t\t[3]. Update Author's Name" << endl
          << "\t\t\t\t\t\t[4]. Update Publish Date" << endl
          << "\t\t\t\t\t\t[5]. Update Entire Row" << endl
          << "\t\t\t\t\t\t[6]. Back" << endl
+         << "\t\t\t\t\t\t\tEnter your choice: ";
+}
+
+void print_sorting_by_menu() {
+    system("clear");
+    cout << "\t\t\t\t\tSort by: " << endl;
+    cout << "\t\t\t\t\t\t[1]. By ID" << endl
+         << "\t\t\t\t\t\t[2]. By Title" << endl
+         << "\t\t\t\t\t\t[3]. By Publish Date" << endl
+         << "\t\t\t\t\t\t[4]. Back" << endl
+         << "\t\t\t\t\t\t\tEnter your choice: ";
+}
+
+void print_sorting_order_menu() {
+    cout << "\t\t\t\t\tOrder by: " << endl;
+    cout << "\t\t\t\t\t\t[1]. Asecnding Order" << endl
+         << "\t\t\t\t\t\t[2]. Descending Order" << endl
+         << "\t\t\t\t\t\t[3]. Back" << endl
+         << "\t\t\t\t\t\t\tEnter your choice: ";
+}
+
+void print_filter_by_menu() {
+    cout << "\t\t\t\t\tFilter by: " << endl;
+    cout << "\t\t\t\t\t\t[1]. Author" << endl
+         << "\t\t\t\t\t\t[2]. Genre" << endl
+         << "\t\t\t\t\t\t[3]. Publish Year" << endl
+         << "\t\t\t\t\t\t[4]. Back" << endl
          << "\t\t\t\t\t\t\tEnter your choice: ";
 }
 
@@ -85,14 +109,74 @@ void print_genre_opt() // display genre options
     cout << "Choose Genre Option: ";
 }
 
-void get_update_choice(int &choice) // check error input
+void get_print_sorting_by_choice(char &choice) // check error input
 {
     bool input_err;
     do
     {
         input_err = false;
         cin >> choice;
-        if (cin.fail() || (choice != 2 && choice != 1 && choice != 3 && choice != 4 && choice != 5))
+        if (cin.fail() || (choice != '2' && choice != '1' && choice != '3' && choice != '4'))
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            input_err = true;
+            cout << "\n\t\t\t\t\t\t\tInvalid input choice\n\n";
+            cout << "\t\t\t\t\t\t\tEnter your choice: ";
+        }
+
+    } while (input_err);
+    cout << endl;
+}
+
+void get_print_sorting_order_choice(char &choice) // check error input
+{
+    bool input_err;
+    do
+    {
+        input_err = false;
+        cin >> choice;
+        if (cin.fail() || (choice != '2' && choice != '1' && choice != '3'))
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            input_err = true;
+            cout << "\n\t\t\t\t\t\t\tInvalid input choice\n\n";
+            cout << "\t\t\t\t\t\t\tEnter your choice: ";
+        }
+
+    } while (input_err);
+    cout << endl;
+}
+
+void get_filter_option_choice(char &choice) // check error input
+{
+    bool input_err;
+    do
+    {
+        input_err = false;
+        cin >> choice;
+        if (cin.fail() || (choice != '2' && choice != '1' && choice != '3' && choice != '4'))
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            input_err = true;
+            cout << "\n\t\t\t\t\t\t\tInvalid input choice\n\n";
+            cout << "\t\t\t\t\t\t\tEnter your choice: ";
+        }
+
+    } while (input_err);
+    cout << endl;
+}
+
+void get_update_choice(char &choice) // check error input
+{
+    bool input_err;
+    do
+    {
+        input_err = false;
+        cin >> choice;
+        if (cin.fail() || (choice != '2' && choice != '1' && choice != '3' && choice != '4' && choice != '5' && choice != '6'))
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -113,9 +197,7 @@ void get_input_choice(char &choice) // check error input
         input_err = false;
         cin >> choice;
         if (cin.fail() || (choice != '2' && choice != '1' && choice != '3' 
-        && choice != '4' && choice != '5' && choice != '6'
-        && choice != 'A' && choice != 'B' && choice != 'C'
-        && choice != 'D' && choice != 'E' && choice != 'F'))
+        && choice != '4' && choice != '5' && choice != '6'))
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
