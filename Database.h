@@ -175,7 +175,7 @@ public:
 
     void printTable()
     {
-        system("cls");
+        system("clear");
         int max_width[] = {5, 5, 5, 10};
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
