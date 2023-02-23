@@ -49,9 +49,14 @@ void print_menu() // display options
     cout << "\t\t\t\t\t\t[1]. Add record" << endl
          << "\t\t\t\t\t\t[2]. Search record" << endl
          << "\t\t\t\t\t\t[3]. Update record" << endl
-         << "\t\t\t\t\t\t[4]. Print records" << endl
-         << "\t\t\t\t\t\t[5]. Delete record" << endl
-         << "\t\t\t\t\t\t[6]. Exit" << endl
+         << "\t\t\t\t\t\t[A]. Print record order by ID in ascending" << endl
+         << "\t\t\t\t\t\t[B]. Print record order by ID in descending" << endl
+         << "\t\t\t\t\t\t[C]. Print record order by title in ascending" << endl
+         << "\t\t\t\t\t\t[D]. Print record order by title in descending" << endl
+         << "\t\t\t\t\t\t[E]. Print record order by publish date in ascending" << endl
+         << "\t\t\t\t\t\t[F]. Print record order by publish date in descending" << endl
+         << "\t\t\t\t\t\t[4]. Delete record" << endl
+         << "\t\t\t\t\t\t[5]. Exit" << endl
          << "\t\t\t\t\t\t\tEnter your choice: ";
 }
 
@@ -98,14 +103,17 @@ void get_update_choice(int &choice) // check error input
     cout << endl;
 }
 
-void get_input_choice(int &choice) // check error input
+void get_input_choice(char &choice) // check error input
 {
     bool input_err;
     do
     {
         input_err = false;
         cin >> choice;
-        if (cin.fail() || (choice != 2 && choice != 1 && choice != 3 && choice != 4 && choice != 5 && choice != 6))
+        if (cin.fail() || (choice != '2' && choice != '1' && choice != '3' 
+        && choice != '4' && choice != '5' && choice != '6'
+        && choice != 'A' && choice != 'B' && choice != 'C'
+        && choice != 'D' && choice != 'E' && choice != 'F'))
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');

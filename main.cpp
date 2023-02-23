@@ -22,14 +22,15 @@ int main()
         // print list of menu to perform functions
         print_menu();
 
-        int choice, update_choice;
+        char choice;
+        int update_choice;
 
         // get input choice and validate input
         get_input_choice(choice);
 
         switch (choice)
         {
-        case 1: // add record to list
+        case '1': // add record to list
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             system("clear");
@@ -67,7 +68,7 @@ int main()
             system("read");
             break;
 
-        case 2: // search for existing record
+        case '2': // search for existing record
             system("clear");
             cout << "\nPlease Input Id to search: ";
             cin >> id;
@@ -77,7 +78,7 @@ int main()
 
             cin.clear();
             break;
-        case 3: // search for existing record
+        case '3': // search for existing record
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -170,12 +171,57 @@ int main()
             }
             cin.clear();
             break;
-        case 4: // print existing records
+
+        
+        case 'A': // print existing records
+            database->sort("id", "ASC");
             database->printTable();
+
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             break;
-        case 5: // delete existing record
+        
+        case 'B': // print existing records
+            database->sort("id", "DESC");
+            database->printTable();
+
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            break;
+
+        case 'C': // print existing records
+            database->sort("title", "ASC");
+            database->printTable();
+
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            break;
+
+        case 'D': // print existing records
+            database->sort("title", "DESC");
+            database->printTable();
+
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            break;
+
+        case 'E': // print existing records
+            database->sort("publishDate", "ASC");
+            database->printTable();
+
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            break;
+        
+        case 'F': // print existing records
+            database->sort("publishDate", "DESC");
+            database->printTable();
+
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            break;
+
+        case '4': // delete existing record
             cout << "Please input id to delete: ";
             cin >> id;
             if (database->deleteRecord(id))
@@ -189,7 +235,7 @@ int main()
             }
             system("read");
             break;
-        case 6: // terminate program
+        case '5': // terminate program
             return 0;
         default:
             cout << "Invalid choice" << endl;

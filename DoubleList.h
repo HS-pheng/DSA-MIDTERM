@@ -1,7 +1,6 @@
 using namespace std;
 
 template <class T> // Generic template for the Double_node class
-
 class Double_Node
 {
 public:
@@ -18,6 +17,8 @@ public:
     string genre;
     string publishDate;
 };
+
+bool compareDate(string a, string b);
 
 template <typename T>
 class Double_list
@@ -205,4 +206,130 @@ public:
             trav = temp;
         }
     }
+
+    void frontBackSplit(Double_Node<T>* source, Double_Node<T>** frontRef, Double_Node<T>** backRef)
+    {
+        Double_Node<T>* fast;
+        Double_Node<T>* slow;
+        slow = source;
+        fast = source->next;
+
+        while(fast->next != NULL) {
+            fast = fast->next;
+            slow = slow->next;
+
+            if (fast->next != NULL) {
+                fast = fast->next;
+            }
+        }
+
+        *frontRef = source;
+        *backRef = slow->next;
+        slow->next = NULL;
+    }
+
+    Double_Node<T>* sortedMerge(Double_Node<T>* headA, Double_Node<T>* headB, string sortedBy, string orderBy) {
+        Double_Node<T>* result;
+
+        if (headA == NULL) {
+            return headB;
+        } else if (headB == NULL) {
+            return headA;
+        }
+
+        if (sortedBy == "id") {
+            bool aToFront = stoi(headA->data.id) <= stoi(headB->data.id);
+            if (orderBy == "DESC") aToFront = !aToFront;
+
+            if (aToFront) {
+                result = headA;
+                result->next = sortedMerge(headA->next, headB, sortedBy, orderBy);
+            } else {
+                result = headB;
+                result->next = sortedMerge(headA, headB->next, sortedBy, orderBy);
+            }
+        }
+
+        if (sortedBy == "title") {
+            bool aToFront = headA->data.title <= headB->data.title;
+            if (orderBy == "DESC") aToFront = !aToFront;
+
+            if (aToFront) {
+                result = headA;
+                result->next = sortedMerge(headA->next, headB, sortedBy, orderBy);
+            } else {
+                result = headB;
+                result->next = sortedMerge(headA, headB->next, sortedBy, orderBy);
+            }
+        }
+
+        if (sortedBy == "publishDate") {
+            bool aToFront = compareDate(headA->data.publishDate, headB->data.publishDate);
+            if (orderBy == "DESC") aToFront = !aToFront;
+ 
+            if (aToFront) {
+                result = headA;
+                result->next = sortedMerge(headA->next, headB, sortedBy, orderBy);
+            } else {
+                result = headB;
+                result->next = sortedMerge(headA, headB->next, sortedBy, orderBy);
+            }
+        }
+
+        return result;
+    }
+
+    void mergeSort(Double_Node<T>** head, string sortedBy, string orderBy) {
+        Double_Node<T>* firstHalf;
+        Double_Node<T>* secondHalf;
+
+        if (*head == NULL || (*head)->next == NULL) {
+            return;
+        }
+
+        frontBackSplit((*head), &firstHalf, &secondHalf);
+
+        mergeSort(&firstHalf, sortedBy, orderBy);
+        mergeSort(&secondHalf, sortedBy, orderBy);
+
+        *head = sortedMerge(firstHalf,secondHalf, sortedBy, orderBy);
+    }
+
+    void sort(string sortedBy, string orderBy) {
+        auto now = chrono::system_clock::now();
+        mergeSort(&list_head, sortedBy, orderBy);
+        auto end = chrono::system_clock::now();
+
+        chrono::duration<double> elapsed_seconds = end - now;
+        cout << "Sorted in: " << elapsed_seconds.count() * 1000 << "ms\n";
+    }
 };
+
+bool compareDate(string a, string b) {
+    string yyyyA, mmA, ddA, yyyyB, mmB, ddB;
+    stringstream dateA(a);
+
+    getline(dateA, mmA, '/');
+    getline(dateA, ddA, '/');
+    getline(dateA, yyyyA, '/');
+
+    stringstream dateB(b);
+
+    getline(dateB, mmB, '/');
+    getline(dateB, ddB, '/');
+    getline(dateB, yyyyB, '/');
+
+    if (yyyyA != yyyyB) {
+        return stoi(yyyyA) > stoi(yyyyB);
+    }
+
+    if (mmA != mmB) {
+        return stoi(mmA) > stoi(mmB);
+    }
+
+    if (ddA != ddB) {
+        return stoi(ddA) > stoi(ddB);
+    }
+
+    return true;
+}

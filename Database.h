@@ -224,4 +224,8 @@ public:
 
         system("read");
     }
+
+    void sort(string sortedBy, string orderBy) {
+        dataTable.sort(sortedBy, orderBy);
+    }
 };
