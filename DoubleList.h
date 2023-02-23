@@ -297,6 +297,7 @@ public:
     }
 
     void sort(string sortedBy, string orderBy) {
+        system("clear");
         auto now = chrono::system_clock::now();
         mergeSort(&list_head, sortedBy, orderBy);
         auto end = chrono::system_clock::now();
