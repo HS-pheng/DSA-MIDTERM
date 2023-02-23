@@ -307,5 +307,14 @@ public:
         printFilter(filterRecord);
     }
 
-    
+    void filterByAuthor(string author){
+        Double_list<DataRecord> filterRecord;
+
+        for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+        {
+            if (((trav->data).author).find(author) != string::npos) filterRecord.push_back(trav->data);  
+        }
+        cout << "Filter by Author: " << author << endl;
+        printFilter(filterRecord);
+    }
 };
