@@ -318,6 +318,14 @@ void getAuthor(string &author) {
     
 } // get author
 
+void getYear(string &year) // get title from user
+{
+    do
+    {
+        cout << "Year: ";
+        getline(cin, year);
+    } while (year == ""); // if title is null, continue looping
+}
 
 string get_next_id() // automatically assign id
 {

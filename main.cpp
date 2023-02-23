@@ -14,7 +14,7 @@ int main()
     // Create new database instance
     Database *database = new Database("MOCK_DATA-4.csv");
 
-    string id = "", title = "", author = "", genre = "", publishDate = "";
+    string id = "", title = "", author = "", genre = "", publishDate = "", year = "";
 
     // Enter program loop
     while (true)
@@ -239,23 +239,30 @@ int main()
             break;
 
         case '6':
+        
             print_filter_by_menu();
             get_filter_option_choice(choice);
             switch (choice)
             {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             case '1':
+            cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 getAuthor(author);
                 database->filterByAuthor(author);
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
             case '2':
+            cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 getGenre(genre);
                 database->filterByGenre(genre);
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
             case '3':
+            cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getYear(year);
+                database->filterByPublishDate(year);
                 break;
             default:
                 break;
