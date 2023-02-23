@@ -1,6 +1,6 @@
-id,title,author,genre,publishDate
+id,title,genre,publishDate
 4,Walk on Water,John Doe,Drama|Thriller,11/17/2022
-5,Knock on Wood,Jane Smith,Comedy,1/31/2022
+5,update title,Jane Smith,Comedy,1/31/2022
 6,God Who Wasn't There,David Lee,Documentary,8/27/2003
 6,God Who Wasn't There,Amy Johnson,Documentary,8/27/2003
 7,Millennium Actress (Sennen joyu),Chris Brown,Animation|Drama|Romance,8/28/2001

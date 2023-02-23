@@ -28,7 +28,7 @@ public:
     void printRecord(string id)
     {
         DataRecord dataRecord = findRecord(id);
-
+        cout << endl;
         cout << left << setfill('-') << setw(5) << "+" << setw((dataRecord.id).length() + 5) << "-" << setw(5) << "+" << setw((dataRecord.title).length() + 5) << "-" << setw(5) << "+";
         cout << left << setw((dataRecord.author).length() + 5) << "-" << setw(5) << "+";
         cout << left << setw((dataRecord.genre).length() + 5) << "-" << setw(5) << "+" << setw((dataRecord.publishDate).length() + 5) << "-" << right << setw(5) << "+" << endl;
@@ -77,7 +77,7 @@ public:
                 continue;
             trav->data.title = title;
         }
-        cout << "Successfully modify title to: " << title << endl;
+        cout << "\nSuccessfully modify title to: " << title << endl;
         printRecord(id);
         close();
     }
@@ -90,7 +90,7 @@ public:
                 continue;
             trav->data.genre = genre;
         }
-        cout << "Successfully modify genre to: " << genre << endl;
+        cout << "\nSuccessfully modify genre to: " << genre << endl;
         printRecord(id);
         close();
     }
@@ -103,7 +103,7 @@ public:
                 continue;
             trav->data.publishDate = publishDate;
         }
-        cout << "Successfully modify publishDate to: " << publishDate << endl;
+        cout << "\nSuccessfully modify publishDate to: " << publishDate << endl;
         printRecord(id);
         close();
     }

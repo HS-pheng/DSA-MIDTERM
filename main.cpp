@@ -96,6 +96,7 @@ int main()
             {
                 cout << "Error: " << err << endl;
                 system("read");
+                break;
             }
             print_update_menu();              // print the update menu which consist of the modifier variable
             get_update_choice(update_choice); // get the update choice
