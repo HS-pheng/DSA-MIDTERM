@@ -1,5 +1,7 @@
 #include "DoubleList.h"
 #include "CSV.h"
+#include <algorithm> // for std::transform
+#include <cctype>    // for std::tolower
 using namespace std;
 class Database
 {
@@ -84,7 +86,7 @@ public:
 
     void updateRecordGenre(string id, string genre)
     {
-         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+        for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
         {
             if ((trav->data).id != id)
                 continue;
@@ -110,7 +112,7 @@ public:
 
     void updateRecordPublishDate(string id, string publishDate)
     {
-         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+        for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
         {
             if ((trav->data).id != id)
                 continue;
@@ -222,51 +224,52 @@ public:
         cout << endl;
         for (int i = 0; i < 5; i++)
             max_width[i] += 5;
-            
-        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[2]) << "-" <<  setw(5) << "+";
+
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+";
         cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-" << right << setw(5) << "+" << endl;
 
-        cout << left << setfill(' ') << setw(5) << "|"  << setw(max_width[0]) << "ID" << setw(5) << "|" << setw(max_width[1]) << "Title" << setw(5) << "|";
+        cout << left << setfill(' ') << setw(5) << "|" << setw(max_width[0]) << "ID" << setw(5) << "|" << setw(max_width[1]) << "Title" << setw(5) << "|";
         cout << left << setw(max_width[2]) << "Author" << setw(5) << "|";
         cout << left << setw(max_width[3]) << "Genre" << setw(5) << "|" << setw(max_width[4]) << "Publish Date" << right << setw(5) << "|" << endl;
 
-        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[2]) << "-" <<  setw(5) << "+";
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+";
         cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-" << right << setw(5) << "+" << endl;
 
-        if (dataTable.size() == 0){
+        if (dataTable.size() == 0)
+        {
             cout << "No Data Found!" << endl;
-        } 
+        }
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
         {
             cout << left << setfill(' ') << setw(5) << "|" << setw(max_width[0]) << (trav->data).id << setw(5) << "|" << setw(max_width[1]) << (trav->data).title << setw(5) << "|";
             cout << left << setw(max_width[2]) << (trav->data).author << setw(5) << "|";
             cout << left << setw(max_width[3]) << (trav->data).genre << setw(5) << "|" << setw(max_width[4]) << (trav->data).publishDate << right << setw(5) << "|" << endl;
-
         }
-        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[2]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-"  << right << setw(5) << "+" << endl;
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-" << right << setw(5) << "+" << endl;
 
-        cout << left << setfill(' ') << setw(5) << "|"  << setw(max_width[0]) << "Total" << setw(5) << " " << setw(max_width[1]) << to_string(dataTable.list_size) + " records" << setw(5) << " ";
+        cout << left << setfill(' ') << setw(5) << "|" << setw(max_width[0]) << "Total" << setw(5) << " " << setw(max_width[1]) << to_string(dataTable.list_size) + " records" << setw(5) << " ";
         cout << left << setw(max_width[2]) << " " << setw(5) << " ";
         cout << left << setw(max_width[3]) << " " << setw(5) << " " << setw(max_width[4]) << " " << right << setw(5) << "|" << endl;
 
-        
-        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[2]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-"  << right << setw(5) << "+" << endl;
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-" << right << setw(5) << "+" << endl;
 
         system("read");
     }
 
-    void sort(string sortedBy, string orderBy) {
+    void sort(string sortedBy, string orderBy)
+    {
         dataTable.sort(sortedBy, orderBy);
     }
 
-    void printFilter(Double_list<DataRecord> filterRecord) {
+    void printFilter(Double_list<DataRecord> filterRecord)
+    {
         int max_width[] = {5, 5, 5, 5, 10};
 
         for (Double_Node<DataRecord> *trav = filterRecord.head(); trav != NULL; trav = trav->next)
@@ -296,66 +299,85 @@ public:
         cout << endl;
         for (int i = 0; i < 5; i++)
             max_width[i] += 5;
-            
-        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[2]) << "-" <<  setw(5) << "+";
+
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+";
         cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-" << right << setw(5) << "+" << endl;
 
-        cout << left << setfill(' ') << setw(5) << "|"  << setw(max_width[0]) << "ID" << setw(5) << "|" << setw(max_width[1]) << "Title" << setw(5) << "|";
+        cout << left << setfill(' ') << setw(5) << "|" << setw(max_width[0]) << "ID" << setw(5) << "|" << setw(max_width[1]) << "Title" << setw(5) << "|";
         cout << left << setw(max_width[2]) << "Author" << setw(5) << "|";
         cout << left << setw(max_width[3]) << "Genre" << setw(5) << "|" << setw(max_width[4]) << "Publish Date" << right << setw(5) << "|" << endl;
 
-        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[2]) << "-" <<  setw(5) << "+";
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+";
         cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-" << right << setw(5) << "+" << endl;
 
-        if (filterRecord.size() == 0){
+        if (filterRecord.size() == 0)
+        {
             cout << "No Data Found!" << endl;
-        } 
+        }
 
         for (Double_Node<DataRecord> *trav = filterRecord.head(); trav != NULL; trav = trav->next)
         {
             cout << left << setfill(' ') << setw(5) << "|" << setw(max_width[0]) << (trav->data).id << setw(5) << "|" << setw(max_width[1]) << (trav->data).title << setw(5) << "|";
             cout << left << setw(max_width[2]) << (trav->data).author << setw(5) << "|";
             cout << left << setw(max_width[3]) << (trav->data).genre << setw(5) << "|" << setw(max_width[4]) << (trav->data).publishDate << right << setw(5) << "|" << endl;
-
         }
-        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[2]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-"  << right << setw(5) << "+" << endl;
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-" << right << setw(5) << "+" << endl;
 
-        cout << left << setfill(' ') << setw(5) << "|"  << setw(max_width[0]) << "Total" << setw(5) << " " << setw(max_width[1]) << to_string(filterRecord.list_size) + " records" << setw(5) << " ";
+        cout << left << setfill(' ') << setw(5) << "|" << setw(max_width[0]) << "Total" << setw(5) << " " << setw(max_width[1]) << to_string(filterRecord.list_size) + " records" << setw(5) << " ";
         cout << left << setw(max_width[2]) << " " << setw(5) << " ";
         cout << left << setw(max_width[3]) << " " << setw(5) << " " << setw(max_width[4]) << " " << right << setw(5) << "|" << endl;
 
-        
-        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[2]) << "-" <<  setw(5) << "+";
-        cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-"  << right << setw(5) << "+" << endl;
+        cout << left << setfill('-') << setw(5) << "+" << setw(max_width[0]) << "-" << setw(5) << "+" << setw(max_width[1]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[2]) << "-" << setw(5) << "+";
+        cout << left << setw(max_width[3]) << "-" << setw(5) << "+" << setw(max_width[4]) << "-" << right << setw(5) << "+" << endl;
 
         system("read");
     }
 
-    void filterByGenre(string genre) {
+    void filterByGenre(string genre)
+    {
         Double_list<DataRecord> filterRecord;
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
         {
-            if (((trav->data).genre).find(genre) != string::npos) filterRecord.push_back(trav->data);  
+            if (((trav->data).genre).find(genre) != string::npos)
+                filterRecord.push_back(trav->data);
         }
         system("clear");
         cout << "\nFilter by Genre: " << genre << endl;
         printFilter(filterRecord);
-
     }
 
-    void filterByPublishDate(string publishYear){
+    // convert a string to lowercase
+    string toLowerCase(string str)
+    {
+        transform(str.begin(), str.end(), str.begin(),
+                  [](unsigned char c)
+                  { return tolower(c); });
+        return str;
+    }
+
+    // compare two string with non case sensitive comparison
+    bool compareAuthorName(const string &str, const string &substr)
+    {
+        string strLower = toLowerCase(str);
+        string substrLower = toLowerCase(substr);
+        return strLower.find(substrLower) != string::npos;
+    }
+
+    void filterByPublishDate(string publishYear)
+    {
         Double_list<DataRecord> filterRecord;
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
         {
-            if (((trav->data).publishDate).find(publishYear) != string::npos){
-                filterRecord.push_back(trav->data);  
+            if (((trav->data).publishDate).find(publishYear) != string::npos)
+            {
+                filterRecord.push_back(trav->data);
             }
         }
         system("clear");
@@ -363,12 +385,14 @@ public:
         printFilter(filterRecord);
     }
 
-    void filterByAuthor(string author){
+    void filterByAuthor(string author)
+    {
         Double_list<DataRecord> filterRecord;
 
         for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
         {
-            if (((trav->data).author).find(author) != string::npos) filterRecord.push_back(trav->data);  
+            if (compareAuthorName((trav->data).author, author))
+                filterRecord.push_back(trav->data);
         }
         system("clear");
         cout << "\nFilter by Author: " << author << endl;
