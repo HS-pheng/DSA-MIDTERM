@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
     // Create new database instance
-    Database *database = new Database("MOCK_DATA_5.csv");
+    Database *database = new Database("MOCK_DATA-4.csv");
 
     string id = "", title = "", author= "", genre = "", publishDate = "";
 
