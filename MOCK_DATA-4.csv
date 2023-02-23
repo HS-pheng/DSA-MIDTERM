@@ -1,8 +1,7 @@
 id,title,genre,publishDate
 4,Walk on Water,John Doe,Drama|Thriller,11/17/2022
-5,update title,Jane Smith,Comedy,1/31/2022
+5,update title,Hongsreng Pheng,Drama,1/31/2022
 6,God Who Wasn't There,David Lee,Documentary,8/27/2003
-6,God Who Wasn't There,Amy Johnson,Documentary,8/27/2003
 7,Millennium Actress (Sennen joyu),Chris Brown,Animation|Drama|Romance,8/28/2001
 9,Hands Across the Table,Katie White,Comedy|Romance,7/12/2019
 11,Girl on a Motorcycle,Michael Johnson,Drama|Romance,10/4/2016
@@ -26,4 +25,4 @@ id,title,genre,publishDate
 29,Mayerling,Katie Brown,Drama|Romance,7/27/2003
 30,Benji,Michael Lee,Documentary,5/29/2007
 72,Ey ke ey ke?,Jessica Lee,Drama,11/11/1111
-70,IDK (second update),Jason Brown,Romantic,12/12/1212
+70,ADK (second update),Jason Brown,Romantic,12/12/1212

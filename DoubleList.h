@@ -1,4 +1,5 @@
 using namespace std;
+#include <cctype> // for std::tolower
 
 template <class T> // Generic template for the Double_node class
 class Double_Node
@@ -198,6 +199,21 @@ public:
         std::swap(list_tail, list.list_tail);
     }
 
+    // // convert a string to lowercase
+    // string toLowerCase(std::string str)
+    // {
+    //     transform(str.begin(), str.end(), str.begin(),
+    //                    [](unsigned char c)
+    //                    { return tolower(c); });
+    //     return str;
+    // }
+
+    // // compare two titles in a non-case sensitive way
+    // bool compareTitles(const string &titleA, const string &titleB)
+    // {
+    //     return toLowerCase(titleA) <= toLowerCase(titleB);
+    // }
+
     ~Double_list()
     {
         for (Double_Node<T> *trav = list_head; trav != NULL;)
@@ -208,18 +224,20 @@ public:
         }
     }
 
-    void frontBackSplit(Double_Node<T>* source, Double_Node<T>** frontRef, Double_Node<T>** backRef)
+    void frontBackSplit(Double_Node<T> *source, Double_Node<T> **frontRef, Double_Node<T> **backRef)
     {
-        Double_Node<T>* fast;
-        Double_Node<T>* slow;
+        Double_Node<T> *fast;
+        Double_Node<T> *slow;
         slow = source;
         fast = source->next;
 
-        while(fast->next != NULL) {
+        while (fast->next != NULL)
+        {
             fast = fast->next;
             slow = slow->next;
 
-            if (fast->next != NULL) {
+            if (fast->next != NULL)
+            {
                 fast = fast->next;
             }
         }
@@ -229,49 +247,67 @@ public:
         slow->next = NULL;
     }
 
-    Double_Node<T>* sortedMerge(Double_Node<T>* headA, Double_Node<T>* headB, string sortedBy, string orderBy) {
-        Double_Node<T>* result;
+    Double_Node<T> *sortedMerge(Double_Node<T> *headA, Double_Node<T> *headB, string sortedBy, string orderBy)
+    {
+        Double_Node<T> *result;
 
-        if (headA == NULL) {
+        if (headA == NULL)
+        {
             return headB;
-        } else if (headB == NULL) {
+        }
+        else if (headB == NULL)
+        {
             return headA;
         }
 
-        if (sortedBy == "id") {
+        if (sortedBy == "id")
+        {
             bool aToFront = stoi(headA->data.id) <= stoi(headB->data.id);
-            if (orderBy == "DESC") aToFront = !aToFront;
+            if (orderBy == "DESC")
+                aToFront = !aToFront;
 
-            if (aToFront) {
+            if (aToFront)
+            {
                 result = headA;
                 result->next = sortedMerge(headA->next, headB, sortedBy, orderBy);
-            } else {
+            }
+            else
+            {
                 result = headB;
                 result->next = sortedMerge(headA, headB->next, sortedBy, orderBy);
             }
         }
 
-        if (sortedBy == "title") {
-            bool aToFront = headA->data.title <= headB->data.title;
-            if (orderBy == "DESC") aToFront = !aToFront;
+        if (sortedBy == "title")
+        {
+            bool aToFront = tolower(headA->data.title[0]) <= tolower(headB->data.title[0]);
+            if (orderBy == "DESC")
+                aToFront = !aToFront;
 
-            if (aToFront) {
+            if (aToFront)
+            {
                 result = headA;
                 result->next = sortedMerge(headA->next, headB, sortedBy, orderBy);
-            } else {
+            }
+            else
+            {
                 result = headB;
                 result->next = sortedMerge(headA, headB->next, sortedBy, orderBy);
             }
         }
 
-        if (sortedBy == "publishDate") {
+        if (sortedBy == "publishDate")
+        {
             bool aToFront = compareDate(headA->data.publishDate, headB->data.publishDate);
-            if (orderBy == "DESC") aToFront = !aToFront;
- 
-            if (aToFront) {
+            if (orderBy == "ASC") aToFront = !aToFront;
+
+            if (aToFront)
+            {
                 result = headA;
                 result->next = sortedMerge(headA->next, headB, sortedBy, orderBy);
-            } else {
+            }
+            else
+            {
                 result = headB;
                 result->next = sortedMerge(headA, headB->next, sortedBy, orderBy);
             }
@@ -280,11 +316,13 @@ public:
         return result;
     }
 
-    void mergeSort(Double_Node<T>** head, string sortedBy, string orderBy) {
-        Double_Node<T>* firstHalf;
-        Double_Node<T>* secondHalf;
+    void mergeSort(Double_Node<T> **head, string sortedBy, string orderBy)
+    {
+        Double_Node<T> *firstHalf;
+        Double_Node<T> *secondHalf;
 
-        if (*head == NULL || (*head)->next == NULL) {
+        if (*head == NULL || (*head)->next == NULL)
+        {
             return;
         }
 
@@ -293,10 +331,11 @@ public:
         mergeSort(&firstHalf, sortedBy, orderBy);
         mergeSort(&secondHalf, sortedBy, orderBy);
 
-        *head = sortedMerge(firstHalf,secondHalf, sortedBy, orderBy);
+        *head = sortedMerge(firstHalf, secondHalf, sortedBy, orderBy);
     }
 
-    void sort(string sortedBy, string orderBy) {
+    void sort(string sortedBy, string orderBy)
+    {
         system("clear");
         auto now = chrono::system_clock::now();
         mergeSort(&list_head, sortedBy, orderBy);
@@ -307,7 +346,8 @@ public:
     }
 };
 
-bool compareDate(string a, string b) {
+bool compareDate(string a, string b)
+{
     string yyyyA, mmA, ddA, yyyyB, mmB, ddB;
     stringstream dateA(a);
 
@@ -321,15 +361,18 @@ bool compareDate(string a, string b) {
     getline(dateB, ddB, '/');
     getline(dateB, yyyyB, '/');
 
-    if (yyyyA != yyyyB) {
+    if (yyyyA != yyyyB)
+    {
         return stoi(yyyyA) > stoi(yyyyB);
     }
 
-    if (mmA != mmB) {
+    if (mmA != mmB)
+    {
         return stoi(mmA) > stoi(mmB);
     }
 
-    if (ddA != ddB) {
+    if (ddA != ddB)
+    {
         return stoi(ddA) > stoi(ddB);
     }
 

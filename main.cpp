@@ -120,7 +120,12 @@ int main()
                 getGenre(genre);
                 database->updateRecordGenre(id, genre);
                 break;
-
+            case '3':
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                getAuthor(author);
+                database->updateRecordAuthor(id, author);
+                break;
             case '4':
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');

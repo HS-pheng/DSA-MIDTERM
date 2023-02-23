@@ -95,6 +95,19 @@ public:
         close();
     }
 
+    void updateRecordAuthor(string id, string author)
+    {
+        for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
+        {
+            if ((trav->data).id != id)
+                continue;
+            trav->data.author = author;
+        }
+        cout << "\nSuccessfully modify author to: " << author << endl;
+        printRecord(id);
+        close();
+    }
+
     void updateRecordPublishDate(string id, string publishDate)
     {
          for (Double_Node<DataRecord> *trav = dataTable.head(); trav != NULL; trav = trav->next)
