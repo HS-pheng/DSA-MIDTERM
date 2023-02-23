@@ -208,6 +208,7 @@ int main()
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 break;
             case '4':
+                main();
                 break;
             default:
                 break;
@@ -233,7 +234,8 @@ int main()
             default:
                 break;
             }
-
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             break;
 
         case '6':
