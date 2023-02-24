@@ -198,7 +198,7 @@ void get_input_choice(char &choice) // check error input
         input_err = false;
         cin >> choice;
         if (cin.fail() || (choice != '2' && choice != '1' && choice != '3' 
-        && choice != '4' && choice != '5' && choice != '6'))
+        && choice != '4' && choice != '5' && choice != '6' && choice != '7' && choice != '8'))
         {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');

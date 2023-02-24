@@ -26,7 +26,6 @@ public:
             getline(ss, author, ',');
             getline(ss, c, ',');
             getline(ss, d, ',');
-
             record.id = a;
             record.title = b;
             record.author = author;
@@ -40,7 +39,7 @@ public:
     void write(Double_list<DataRecord> lm)
     {
         ofstream fout(fileName);
-        fout << "id,title,genre,publishDate\n";
+        fout << "id,title,author,genre,publishDate\n";
 
         for (Double_Node<DataRecord> *trav = lm.head(); trav != NULL; trav = trav->next)
         {
